@@ -1,49 +1,12 @@
 import type { NextPage } from "next";
-import { useState } from "react";
-import { NewTaskDialog } from "./NewTaskDialog";
-
-export type Task = {
-  title: string;
-};
+import { useTaskList } from "./hooks/task";
+import { TaskListForm } from "./component/TaskList";
 
 const Home: NextPage = () => {
-  const [newTaskDialogVisible, setNewTaskDialogVisible] = useState(false);
-
-  const [taskList, setTaskList] = useState<Task[]>([]);
-
+  const taskList = useTaskList();
   return (
     <>
-      <button
-        onClick={() => {
-          setNewTaskDialogVisible(true);
-        }}
-      >
-        Add Task
-      </button>
-
-      <table>
-        <tbody>
-          {taskList.map((task, i) => {
-            return (
-              <tr key={i}>
-                <td>{task.title}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-
-      <NewTaskDialog
-        visible={newTaskDialogVisible}
-        onClose={() => {
-          setNewTaskDialogVisible(false);
-        }}
-        onAdd={(task) => {
-          // `task` is the output of the NewTaskDialog
-          setTaskList((list) => [...taskList, task]);
-          setNewTaskDialogVisible(false);
-        }}
-      />
+      <TaskListForm taskList={taskList} />
     </>
   );
 };

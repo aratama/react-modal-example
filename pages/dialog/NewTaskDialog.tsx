@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { Task } from "./index.page";
+import { Task } from "../index.page";
 import { ModalDialog } from "./ModalDialog";
 
 export type NewTaskDialogProps = {

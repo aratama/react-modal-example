@@ -1,12 +1,11 @@
 import type { NextPage } from "next";
-import { useTaskList } from "./hooks/task";
 import { TaskListForm } from "./component/TaskList";
 
 const Home: NextPage = () => {
-  const taskList = useTaskList();
   return (
     <>
-      <TaskListForm taskList={taskList} />
+      {/* This is a common part with `/add` page */}
+      <TaskListForm />
     </>
   );
 };

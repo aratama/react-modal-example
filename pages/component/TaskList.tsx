@@ -1,14 +1,22 @@
 import { useRouter } from "next/router";
-import { FC } from "react";
-import { Task } from "../model/task";
+import { FC, useEffect, useState } from "react";
+import { YesNoDialog } from "../dialog/YesNoDialog";
+import { clearTasks, useTaskList } from "../hooks/task";
 
-export type TaskListFormProps = {
-  taskList: Task[];
-};
+export type TaskListFormProps = {};
 
 export const TaskListForm: FC<TaskListFormProps> = (props) => {
-  const { taskList } = props;
   const router = useRouter();
+  const taskList = useTaskList();
+  const [yesNoDialogVisible, setYesNoDialogVisible] = useState(false);
+
+  useEffect(() => {
+    console.log("load");
+    return () => {
+      console.log("unload");
+    };
+  }, []);
+
   return (
     <>
       <button
@@ -17,6 +25,14 @@ export const TaskListForm: FC<TaskListFormProps> = (props) => {
         }}
       >
         Add Task
+      </button>
+
+      <button
+        onClick={() => {
+          setYesNoDialogVisible(true);
+        }}
+      >
+        Clear Task
       </button>
 
       <table>
@@ -30,6 +46,16 @@ export const TaskListForm: FC<TaskListFormProps> = (props) => {
           })}
         </tbody>
       </table>
+
+      <YesNoDialog
+        visible={yesNoDialogVisible}
+        onComplete={async (value) => {
+          setYesNoDialogVisible(false);
+          if (value) {
+            await clearTasks();
+          }
+        }}
+      />
     </>
   );
 };

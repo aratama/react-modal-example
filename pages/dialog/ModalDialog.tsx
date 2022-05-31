@@ -1,18 +1,18 @@
 import { FC, ReactElement, ReactNode } from "react";
 
-export type ModalDialogProps = {
+export type ModalDialogFrameProps = {
   title: string;
-  visible: boolean;
+  visible?: boolean;
   onClose: () => void;
   children: ReactNode[] | ReactNode;
 };
 
-export const ModalDialog: FC<ModalDialogProps> = (props) => {
+export const ModalDialogFrame: FC<ModalDialogFrameProps> = (props) => {
   const { title, visible, children, onClose } = props;
   return (
     <div
       style={{
-        display: visible ? "flex" : "none",
+        display: typeof visible === "undefined" || visible ? "flex" : "none",
         justifyContent: "center",
         alignItems: "center",
         position: "fixed",
@@ -28,22 +28,34 @@ export const ModalDialog: FC<ModalDialogProps> = (props) => {
       }}
     >
       <div
-        style={{ backgroundColor: "white", padding: "2em" }}
+        style={{ backgroundColor: "white" }}
         onClick={(e) => {
           e.stopPropagation();
         }}
       >
-        <div>{title}</div>
-        <div>
-          <button
-            onClick={() => {
-              onClose();
-            }}
-          >
-            Close
-          </button>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            padding: "0.5em",
+            backgroundColor: "#333",
+            color: "white",
+            gap: "4em",
+          }}
+        >
+          <div>{title}</div>
+          <div>
+            <button
+              onClick={() => {
+                onClose();
+              }}
+            >
+              Close
+            </button>
+          </div>
         </div>
-        {children}
+
+        <div style={{ padding: "2em" }}>{children}</div>
       </div>
     </div>
   );

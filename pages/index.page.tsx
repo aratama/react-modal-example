@@ -13,21 +13,25 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <button
-        onClick={() => {
-          setNewTaskDialogVisible(true);
-        }}
-      >
-        Add Task
-      </button>
+      <h1>Todo List</h1>
 
-      <button
-        onClick={() => {
-          setYesNoDialogVisible(true);
-        }}
-      >
-        Clear Task
-      </button>
+      <div style={{ display: "flex", gap: "2em" }}>
+        <button
+          onClick={() => {
+            setNewTaskDialogVisible(true);
+          }}
+        >
+          Add Task
+        </button>
+
+        <button
+          onClick={() => {
+            setYesNoDialogVisible(true);
+          }}
+        >
+          Clear Task
+        </button>
+      </div>
 
       <table>
         <tbody>

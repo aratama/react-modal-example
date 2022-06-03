@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { ModalDialogFrame } from "./ModalDialog";
+import { ModalDialog } from "./ModalDialog";
 
 export type YesNoDialogProps = {
   visible: boolean;
@@ -9,7 +9,7 @@ export type YesNoDialogProps = {
 export const YesNoDialog: FC<YesNoDialogProps> = (props) => {
   const { visible, onComplete } = props;
   return (
-    <ModalDialogFrame
+    <ModalDialog
       title="Delete the Task?"
       visible={visible}
       onClose={() => {
@@ -32,6 +32,6 @@ export const YesNoDialog: FC<YesNoDialogProps> = (props) => {
           No
         </button>
       </div>
-    </ModalDialogFrame>
+    </ModalDialog>
   );
 };

@@ -7,7 +7,7 @@ export type ModalDialogFrameProps = {
   children: ReactNode[] | ReactNode;
 };
 
-export const ModalDialogFrame: FC<ModalDialogFrameProps> = (props) => {
+export const ModalDialog: FC<ModalDialogFrameProps> = (props) => {
   const { title, visible, children, onClose } = props;
   return (
     <div
@@ -50,7 +50,7 @@ export const ModalDialogFrame: FC<ModalDialogFrameProps> = (props) => {
                 onClose();
               }}
             >
-              Close
+              ✕
             </button>
           </div>
         </div>

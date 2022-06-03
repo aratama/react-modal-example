@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { ModalDialogFrame } from "./ModalDialog";
+import { ModalDialog } from "./ModalDialog";
 import { Task, validateTask } from "../model/task";
 import { addTask } from "../hooks/task";
 import { ItemListDialog } from "./ItemListDialog";
@@ -16,7 +16,7 @@ export const NewTaskDialog: FC<NewTaskDialogProps> = (props) => {
   const [itemListVisible, setItemListVisible] = useState(false);
   return (
     <>
-      <ModalDialogFrame
+      <ModalDialog
         title="New Task"
         visible={props.open}
         onClose={() => {
@@ -26,32 +26,34 @@ export const NewTaskDialog: FC<NewTaskDialogProps> = (props) => {
       >
         <F5Input value={title} onInput={(value) => setTitle(value)} />
 
-        <p>Press F5 to Open Often Used Items</p>
+        <p>Press F5 to open often-used items list</p>
 
-        <button
-          onClick={async () => {
-            const task: Task = { title };
+        <div style={{ display: "flex", gap: "2em" }}>
+          <button
+            onClick={async () => {
+              const task: Task = { title };
 
-            // validate..
-            const errors = validateTask(task);
+              // validate..
+              const errors = validateTask(task);
 
-            if (errors.length === 0) {
-              setTitle("");
-              // OK, add the task in the database...
-              props.onComplete(task);
-            } else {
-              // OOPS, show the errors
-              alert(errors.join("\n"));
-            }
-          }}
-        >
-          Create
-        </button>
+              if (errors.length === 0) {
+                setTitle("");
+                // OK, add the task in the database...
+                props.onComplete(task);
+              } else {
+                // OOPS, show the errors
+                alert(errors.join("\n"));
+              }
+            }}
+          >
+            Create
+          </button>
 
-        <button onClick={() => setItemListVisible(true)}>
-          Choose from history
-        </button>
-      </ModalDialogFrame>
+          <button onClick={() => setItemListVisible(true)}>
+            Choose from history
+          </button>
+        </div>
+      </ModalDialog>
 
       <ItemListDialog
         open={itemListVisible}

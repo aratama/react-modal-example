@@ -1,4 +1,4 @@
-import { ModalDialogFrame } from "./ModalDialog";
+import { ModalDialog } from "./ModalDialog";
 
 export type TaskListFormProps = {
   open: boolean;
@@ -9,20 +9,16 @@ export type TaskListFormProps = {
 
 export const ItemListDialog = (props: TaskListFormProps) => {
   return (
-    <ModalDialogFrame
-      title="Select"
-      visible={props.open}
-      onClose={props.onCancel}
-    >
-      <ul>
+    <ModalDialog title="Select" visible={props.open} onClose={props.onCancel}>
+      <div>
         {props.items.map((item, i) => {
           return (
-            <li key={i}>
+            <div key={i}>
               <button onClick={() => props.onComplete(item)}>{item}</button>
-            </li>
+            </div>
           );
         })}
-      </ul>
-    </ModalDialogFrame>
+      </div>
+    </ModalDialog>
   );
 };
